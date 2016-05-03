@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 
-MAINTAINER Thomas Nabord <thomas.nabord@prestashop.com>
+MAINTAINER Laure-Anne Razafinjatovo
 
 ENV PS_VERSION 1.6.1.4
 
