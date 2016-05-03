@@ -2,26 +2,7 @@ FROM php:5.6-apache
 
 MAINTAINER Thomas Nabord <thomas.nabord@prestashop.com>
 
-ENV PS_VERSION {PS_VERSION}
-
-ENV PS_DOMAIN prestashop.local
-ENV DB_SERVER 127.0.0.1
-ENV DB_PORT 3306
-ENV DB_NAME prestashop
-ENV DB_USER root
-ENV DB_PASSWD admin
-ENV ADMIN_MAIL demo@prestashop.com
-ENV ADMIN_PASSWD prestashop_demo
-ENV PS_LANGUAGE en
-ENV PS_COUNTRY gb
-ENV PS_INSTALL_AUTO 0
-ENV PS_DEV_MODE 0
-ENV PS_HOST_MODE 0
-ENV PS_HANDLE_DYNAMIC_DOMAIN 0
-
-ENV PS_FOLDER_ADMIN admin
-ENV PS_FOLDER_INSTALL install
-
+ENV PS_VERSION 1.6.1.4
 
 # Avoid MySQL questions during installation
 ENV DEBIAN_FRONTEND noninteractive
@@ -43,7 +24,7 @@ RUN apt-get update \
     && docker-php-ext-install iconv mcrypt pdo mysql pdo_mysql mbstring soap gd
 
 # Get PrestaShop
-ADD {PS_URL} /tmp/prestashop.zip
+ADD https://www.prestashop.com/ajax/controller.php?method=download&type=releases&file=prestashop_1.6.1.4.zip&language=fr /tmp/prestashop.zip
 RUN unzip -q /tmp/prestashop.zip -d /tmp/ && mv /tmp/prestashop/* /var/www/html && rm /tmp/prestashop.zip
 COPY config_files/docker_updt_ps_domains.php /var/www/html/
 
